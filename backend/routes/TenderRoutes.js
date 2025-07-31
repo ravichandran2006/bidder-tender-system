@@ -31,6 +31,24 @@ router.post('/signup', upload.single('proof'), async (req, res) => {
   }
 });
 
+// POST /api/tender/login
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await TenderUser.findOne({ email, password });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    res.status(200).json({ message: 'Login successful', user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Login failed' });
+  }
+});
+
+
 // @route GET /api/tender/users
 router.get('/users', async (req, res) => {
   try {
