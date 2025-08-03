@@ -12,7 +12,7 @@ const TenderLogin = () => {
     e.preventDefault();
     try {
       const res = await axios.post('http://localhost:5000/api/tender/login', { email, password });
-      alert('Login successful');
+      alert(res.data.message||'Login successful');
       // navigate('/dashboard'); // Optional redirect
     } catch (err) {
       alert('Login failed.');
