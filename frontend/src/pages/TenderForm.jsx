@@ -172,13 +172,13 @@ const TenderForm = () => {
                 </label>
                 <select
                   {...register("country", { required: "Country is required" })}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.country ? "border-red-500" : "border-gray-300"
                   }`}
                 >
                   <option value="">Select Country</option>
                   {countries.map((country) => (
-                    <option key={country.isoCode} value={country.isoCode}>
+                    <option key={country.isoCode} value={country.isoCode} className="text-black">
                       {country.name}
                     </option>
                   ))}
@@ -198,14 +198,14 @@ const TenderForm = () => {
                 <select
                   {...register("state", { required: "State is required" })}
                   disabled={!selectedCountry}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.state ? "border-red-500" : "border-gray-300"
                   } ${!selectedCountry ? "bg-gray-50" : ""}`}
                 >
                   <option value="">Select State</option>
                   {selectedCountry &&
                     State.getStatesOfCountry(selectedCountry).map((state) => (
-                      <option key={state.isoCode} value={state.isoCode}>
+                      <option key={state.isoCode} value={state.isoCode} className="text-black">
                         {state.name}
                       </option>
                     ))}
@@ -225,14 +225,14 @@ const TenderForm = () => {
                 <select
                   {...register("city", { required: "City is required" })}
                   disabled={!selectedCountry || !watch("state")}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.city ? "border-red-500" : "border-gray-300"
                   } ${!selectedCountry || !watch("state") ? "bg-gray-50" : ""}`}
                 >
                   <option value="">Select City</option>
                   {selectedCountry && watch("state") &&
                     City.getCitiesOfState(selectedCountry, watch("state")).map((city) => (
-                      <option key={city.name} value={city.name}>
+                      <option key={city.name} value={city.name} className="text-black">
                         {city.name}
                       </option>
                     ))}
@@ -258,7 +258,7 @@ const TenderForm = () => {
                       message: "Invalid pincode format"
                     }
                   })}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.pincode ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -277,7 +277,7 @@ const TenderForm = () => {
                 <div className="flex">
                   <select
                     {...register("countryCode", { required: "Country code is required" })}
-                    className={`w-1/3 px-2 py-2 border rounded-l-md focus:ring-blue-500 focus:border-blue-500 ${
+                    className={`w-1/3 px-2 py-2 border rounded-l-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                       errors.countryCode ? "border-red-500" : "border-gray-300"
                     }`}
                   >
@@ -308,7 +308,7 @@ const TenderForm = () => {
                         message: "Invalid phone number"
                       }
                     })}
-                    className={`flex-1 px-3 py-2 border-t border-b border-r rounded-r-md focus:ring-blue-500 focus:border-blue-500 ${
+                    className={`flex-1 px-3 py-2 border-t border-b border-r rounded-r-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                       errors.phone ? "border-red-500" : "border-gray-300"
                     }`}
                   />
@@ -334,7 +334,7 @@ const TenderForm = () => {
                       message: "Invalid email address"
                     }
                   })}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.email ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -363,7 +363,7 @@ const TenderForm = () => {
                 </label>
                 <input
                   {...register("projectName", { required: "Project name is required" })}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.projectName ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -381,13 +381,13 @@ const TenderForm = () => {
                 </label>
                 <select
                   {...register("projectCountry", { required: "Project country is required" })}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.projectCountry ? "border-red-500" : "border-gray-300"
                   }`}
                 >
                   <option value="">Select Country</option>
                   {countries.map((country) => (
-                    <option key={country.isoCode} value={country.isoCode}>
+                    <option key={country.isoCode} value={country.isoCode} className="text-black">
                       {country.name}
                     </option>
                   ))}
@@ -407,14 +407,14 @@ const TenderForm = () => {
                 <select
                   {...register("projectState", { required: "Project state is required" })}
                   disabled={!selectedProjectCountry}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.projectState ? "border-red-500" : "border-gray-300"
                   } ${!selectedProjectCountry ? "bg-gray-50" : ""}`}
                 >
                   <option value="">Select State</option>
                   {selectedProjectCountry &&
                     State.getStatesOfCountry(selectedProjectCountry).map((state) => (
-                      <option key={state.isoCode} value={state.isoCode}>
+                      <option key={state.isoCode} value={state.isoCode} className="text-black">
                         {state.name}
                       </option>
                     ))}
@@ -434,14 +434,14 @@ const TenderForm = () => {
                 <select
                   {...register("projectDistrict", { required: "Project district is required" })}
                   disabled={!selectedProjectCountry || !selectedProjectState}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.projectDistrict ? "border-red-500" : "border-gray-300"
                   } ${!selectedProjectCountry || !selectedProjectState ? "bg-gray-50" : ""}`}
                 >
                   <option value="">Select District</option>
                   {selectedProjectCountry && selectedProjectState &&
                     City.getCitiesOfState(selectedProjectCountry, selectedProjectState).map((city) => (
-                      <option key={city.name} value={city.name}>
+                      <option key={city.name} value={city.name} className="text-black">
                         {city.name}
                       </option>
                     ))}
@@ -467,7 +467,7 @@ const TenderForm = () => {
                       message: "Invalid pincode format"
                     }
                   })}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.projectPincode ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -486,7 +486,7 @@ const TenderForm = () => {
                 <textarea
                   {...register("projectAddress", { required: "Project address is required" })}
                   rows={3}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.projectAddress ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -512,7 +512,7 @@ const TenderForm = () => {
                   startDate={startDate}
                   endDate={endDate}
                   placeholderText="Select start date"
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.startDate ? "border-red-500" : "border-gray-300"
                   }`}
                   showYearDropdown
@@ -544,7 +544,7 @@ const TenderForm = () => {
                   endDate={endDate}
                   minDate={startDate}
                   placeholderText="Select end date"
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.endDate ? "border-red-500" : "border-gray-300"
                   }`}
                   showYearDropdown
@@ -569,7 +569,7 @@ const TenderForm = () => {
                   type="number"
                   value={durationYears}
                   readOnly
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-black"
                 />
               </div>
 
@@ -581,7 +581,7 @@ const TenderForm = () => {
                   type="number"
                   value={durationMonths}
                   readOnly
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-black"
                 />
               </div>
 
@@ -601,13 +601,13 @@ const TenderForm = () => {
                   />
                   <label
                     htmlFor="projectDocuments"
-                    className={`px-4 py-2 bg-blue-50 text-blue-700 rounded-l-md border border-r-0 cursor-pointer hover:bg-blue-100 ${
+                    className={`px-4 py-2 bg-blue-50 text-blue-700 rounded-l-md border border-r-0 cursor-pointer hover:bg-blue-100 text-black ${
                       errors.projectDocuments ? "border-red-500" : "border-gray-300"
                     }`}
                   >
                     Choose File
                   </label>
-                  <div className={`flex-1 px-4 py-2 border rounded-r-md bg-gray-50 truncate ${
+                  <div className={`flex-1 px-4 py-2 border rounded-r-md bg-gray-50 truncate text-black ${
                     errors.projectDocuments ? "border-red-500" : "border-gray-300"
                   }`}>
                     {file ? file.name : "No file chosen"}
@@ -628,23 +628,23 @@ const TenderForm = () => {
                 <div className="flex">
                   <input
                     type="number"
-                    step="0.01"
+                    step="100000"
                     {...register("estimatedAmount", { 
                       required: "Amount is required",
                       min: { value: 0, message: "Amount must be positive" }
                     })}
-                    className={`flex-1 px-3 py-2 border rounded-l-md focus:ring-blue-500 focus:border-blue-500 ${
+                    className={`flex-1 px-3 py-2 border rounded-l-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                       errors.estimatedAmount ? "border-red-500" : "border-gray-300"
                     }`}
                   />
                   <select
                     {...register("currency", { required: "Currency is required" })}
-                    className={`w-1/3 px-2 py-2 border-t border-b border-r rounded-r-md focus:ring-blue-500 focus:border-blue-500 ${
+                    className={`w-1/3 px-2 py-2 border-t border-b border-r rounded-r-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                       errors.currency ? "border-red-500" : "border-gray-300"
                     }`}
                   >
                     {currencies.map((currency) => (
-                      <option key={currency.code} value={currency.code}>
+                      <option key={currency.code} value={currency.code} className= "text-black" >
                         {currency.symbol} ({currency.code})
                       </option>
                     ))}
@@ -671,7 +671,7 @@ const TenderForm = () => {
               <textarea
                 {...register("description")}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-black "
                 placeholder="Provide additional details about your tender..."
               />
             </div>
