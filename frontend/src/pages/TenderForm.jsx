@@ -136,7 +136,7 @@ const TenderForm = () => {
                 </label>
                 <input
                   {...register("firstName", { required: "First name is required" })}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.firstName ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -154,7 +154,7 @@ const TenderForm = () => {
                 </label>
                 <input
                   {...register("lastName", { required: "Last name is required" })}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 text-black ${
                     errors.lastName ? "border-red-500" : "border-gray-300"
                   }`}
                 />
