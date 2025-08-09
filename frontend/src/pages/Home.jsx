@@ -1,32 +1,108 @@
-// src/pages/Home.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate();
 
-  return (
-    <div className="w-screen min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-blue-700">Bidder-Tender Management System</h1>
-      <p className="text-lg text-gray-700 mb-10 max-w-xl text-center">
-        Choose your role to proceed with the tender process.
-      </p>
+  // CSS styles as JavaScript objects
+  const styles = {
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
+      backgroundColor: '#f8fafc',
+      padding: '20px',
+      fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+      textAlign: 'center'
+    },
+    title: {
+      color: '#2563eb',
+      fontSize: '2.5rem',
+      fontWeight: 'bold',
+      marginBottom: '2rem',
+      animation: 'fadeIn 0.5s ease-in-out'
+    },
+    subtitle: {
+      color: '#666',
+      fontSize: '1.1rem',
+      marginBottom: '3rem',
+      maxWidth: '600px',
+      lineHeight: '1.6'
+    },
+    buttonContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '1.5rem',
+      '@media (min-width: 640px)': {
+        flexDirection: 'row'
+      }
+    },
+    tenderButton: {
+      backgroundColor: '#2563eb',
+      color: 'white',
+      padding: '0.75rem 1.5rem',
+      borderRadius: '8px',
+      fontSize: '1rem',
+      fontWeight: '500',
+      cursor: 'pointer',
+      border: 'none',
+      transition: 'background-color 0.3s',
+      minWidth: '200px',
+      ':hover': {
+        backgroundColor: '#1d4ed8'
+      }
+    },
+    bidderButton: {
+      backgroundColor: '#059669',
+      color: 'white',
+      padding: '0.75rem 1.5rem',
+      borderRadius: '8px',
+      fontSize: '1rem',
+      fontWeight: '500',
+      cursor: 'pointer',
+      border: 'none',
+      transition: 'background-color 0.3s',
+      minWidth: '200px',
+      ':hover': {
+        backgroundColor: '#047857'
+      }
+    },
+    // Keyframes for animations
+    keyframes: `
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    `
+  };
 
-      <div className="flex flex-col sm:flex-row gap-7">
-        <button
-          onClick={() => navigate('/tender-login')}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
-        >
-          Tender Login
-        </button>
-        <button
-          onClick={() => navigate('/bidder-login')}
-          className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
-        >
-          Bidder Login
-        </button>
+  return (
+    <>
+      <style>{styles.keyframes}</style>
+      <div style={styles.container}>
+        <h1 style={styles.title}>Bidder-Tender Management System</h1>
+        <p style={styles.subtitle}>
+          Choose your role to proceed with the tender process.
+        </p>
+
+        <div style={styles.buttonContainer}>
+          <button
+            onClick={() => navigate('/tender-login')}
+            style={styles.tenderButton}
+          >
+            Tender Login
+          </button>
+          <button
+            onClick={() => navigate('/bidder-login')}
+            style={styles.bidderButton}
+          >
+            Bidder Login
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

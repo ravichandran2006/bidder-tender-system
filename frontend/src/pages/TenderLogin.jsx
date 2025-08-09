@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,78 +6,265 @@ const TenderLogin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError('');
     try {
       const res = await axios.post('http://localhost:5000/api/tender/login', { email, password });
-      alert('Login successful');
-      // navigate('/dashboard'); // Optional redirect
+      localStorage.setItem('tenderUser', JSON.stringify(res.data.user));
+      navigate('/dashboard');
     } catch (err) {
-      alert('Login failed.');
+      setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  // CSS styles as JavaScript objects
+  const styles = {
+    container: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
+      backgroundColor: '#f8fafc',
+      padding: '20px',
+      fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif'
+    },
+    card: {
+      backgroundColor: '#ffffff',
+      borderRadius: '10px',
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+      width: '100%',
+      maxWidth: '500px',
+      padding: '2rem',
+      animation: 'fadeIn 0.5s ease-in-out'
+    },
+    header: {
+      textAlign: 'center',
+      marginBottom: '2rem'
+    },
+    headerTitle: {
+      color: '#2563eb',
+      fontSize: '1.8rem',
+      marginBottom: '0.5rem'
+    },
+    headerSubtitle: {
+      color: '#666',
+      fontSize: '0.9rem'
+    },
+    errorMessage: {
+      color: '#ef4444',
+      backgroundColor: '#fee2e2',
+      padding: '0.75rem',
+      borderRadius: '5px',
+      marginBottom: '1.5rem',
+      fontSize: '0.9rem',
+      textAlign: 'center',
+      animation: 'shake 0.5s'
+    },
+    form: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '1.5rem'
+    },
+    formGroup: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '0.5rem'
+    },
+    label: {
+      fontSize: '0.9rem',
+      color: '#333',
+      fontWeight: '500'
+    },
+    input: {
+      padding: '0.75rem',
+      border: '1px solid #ddd',
+      borderRadius: '5px',
+      fontSize: '1rem',
+      transition: 'border-color 0.3s, box-shadow 0.3s',
+      color: 'black', // Explicit black text color
+      backgroundColor: 'white', // Explicit white background
+      caretColor: '#2563eb' // Blue cursor color
+    },
+    inputFocus: {
+      outline: 'none',
+      borderColor: '#2563eb',
+      boxShadow: '0 0 0 2px rgba(37, 99, 235, 0.2)',
+      color: 'black', // Maintain black text when focused
+      backgroundColor: 'white'
+    },
+    submitBtn: {
+      backgroundColor: '#2563eb',
+      color: 'white',
+      border: 'none',
+      padding: '0.75rem',
+      borderRadius: '5px',
+      fontSize: '1rem',
+      fontWeight: '500',
+      cursor: 'pointer',
+      transition: 'background-color 0.3s',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '45px'
+    },
+    submitBtnHover: {
+      backgroundColor: '#1d4ed8'
+    },
+    submitBtnDisabled: {
+      backgroundColor: '#93c5fd',
+      cursor: 'not-allowed'
+    },
+    spinner: {
+      width: '20px',
+      height: '20px',
+      border: '3px solid rgba(255, 255, 255, 0.3)',
+      borderRadius: '50%',
+      borderTopColor: 'white',
+      animation: 'spin 1s ease-in-out infinite',
+      marginRight: '8px'
+    },
+    footer: {
+      textAlign: 'center',
+      marginTop: '1.5rem',
+      fontSize: '0.9rem',
+      color: '#666'
+    },
+    linkBtn: {
+      background: 'none',
+      border: 'none',
+      color: '#2563eb',
+      cursor: 'pointer',
+      fontWeight: '500',
+      padding: '0'
+    },
+    backBtn: {
+      background: 'none',
+      border: 'none',
+      color: '#2563eb',
+      cursor: 'pointer',
+      marginTop: '1rem',
+      fontSize: '0.9rem'
+    }
+  };
+
+  // Keyframes for animations with additional input styling
+  const keyframes = `
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
+    }
+    input, input:focus, input:hover, input:active {
+      color: black !important;
+      -webkit-text-fill-color: black !important;
+      background-color: white !important;
+    }
+    input::placeholder {
+      color: #999 !important;
+      opacity: 1 !important;
+    }
+  `;
+
   return (
-    <div className="w-screen min-h-screen bg-blue-50 flex items-center justify-center px-4">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">
-          Tender Publisher Login
-        </h2>
-
-        <form className="space-y-5" onSubmit={handleLogin}>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter email"
-              className="w-full border border-gray-300 rounded px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            />
+    <>
+      <style>{keyframes}</style>
+      <div style={styles.container}>
+        <div style={styles.card}>
+          <div style={styles.header}>
+            <h2 style={styles.headerTitle}>Tender Publisher Login</h2>
+            <p style={styles.headerSubtitle}>Access your account to manage tenders</p>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-              className="w-full border border-gray-300 rounded px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            />
-          </div>
+          {error && <div style={styles.errorMessage}>{error}</div>}
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-200"
-          >
-            Login
-          </button>
-        </form>
+          <form onSubmit={handleLogin} style={styles.form}>
+            <div style={styles.formGroup}>
+              <label style={styles.label} htmlFor="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                style={{
+                  ...styles.input,
+                  color: 'black',
+                  backgroundColor: 'white'
+                }}
+                required
+              />
+            </div>
 
-        <div className="text-center mt-6 text-sm">
-          <p>
-            Don’t have an account?{' '}
-            <button
-              onClick={() => navigate('/tender-signup')}
-              className="text-blue-600 font-medium hover:underline"
+            <div style={styles.formGroup}>
+              <label style={styles.label} htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                style={{
+                  ...styles.input,
+                  color: 'black',
+                  backgroundColor: 'white'
+                }}
+                required
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              style={{
+                ...styles.submitBtn,
+                ...(isLoading ? styles.submitBtnDisabled : {}),
+                ...(!isLoading ? {':hover': styles.submitBtnHover} : {})
+              }}
+              disabled={isLoading}
             >
-              Sign Up
+              {isLoading ? (
+                <>
+                  <span style={styles.spinner}></span>
+                  Processing...
+                </>
+              ) : 'Login'}
             </button>
-          </p>
-          <button
-            onClick={() => navigate('/')}
-            className="mt-4 text-blue-500 hover:underline block"
-          >
-            ← Back to Home
-          </button>
+          </form>
+
+          <div style={styles.footer}>
+            <p>
+              Don't have an account?{' '}
+              <button 
+                onClick={() => navigate('/tender-signup')} 
+                style={styles.linkBtn}
+              >
+                Sign Up
+              </button>
+            </p>
+            <button 
+              onClick={() => navigate('/')} 
+              style={styles.backBtn}
+            >
+              ← Back to Home
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
